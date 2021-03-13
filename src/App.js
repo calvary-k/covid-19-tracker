@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { fetchCaseData, fetchProvinceData, fetchVaccineData } from './api';
-import { Cards, LocationPicker } from './components';
+import { Cards, Chart, LocationPicker } from './components';
 import styles from './App.module.css';
 
 class App extends React.Component {
   state = {
     caseData: {},
     vaccineData: {},
-    province: '',
+    province: 'INDONESIA',
   };
 
   async componentDidMount() {
@@ -26,17 +26,18 @@ class App extends React.Component {
     } else {
       const caseData = await fetchCaseData();
 
-      this.setState({ caseData, province: province });
+      this.setState({ caseData, province: 'INDONESIA' });
     }
   }
 
   render() {
-    const { caseData, vaccineData } = this.state;
+    const { caseData, vaccineData, province } = this.state;
 
     return (
       <div className={styles.container}>
         <Cards caseData={caseData} vaccineData={vaccineData}/>
         <LocationPicker handleProvinceChange={this.handleProvinceChange} />
+        <Chart caseData={caseData} province={province}/>
       </div>
     );
   }
