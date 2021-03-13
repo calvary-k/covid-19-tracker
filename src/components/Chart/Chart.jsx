@@ -1,9 +1,11 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
+import styles from './Chart.module.css';
+
 const Chart = ({ caseData: { confirmed, recovered, deaths }, province }) => {
   return (
-    <div>
+    <div className={styles.container}>
       <Bar
         data={{
           labels: ['Infected', 'Recovered', 'Deaths'],
